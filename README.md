@@ -1,6 +1,4 @@
 # Coherence_EEG
 
-Fonction pour calculer la coherence corticomusculaire par FFT.
-Les explications sont dans le fichier .m :) 
-
-Bon courage, 
+Fonction pour calculer la coherence corticomusculaire par FFT. 
+Un ajout sera bientôt fait pour calculer via ondelettes
