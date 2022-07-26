@@ -18,7 +18,7 @@ repertoire_1 = '/Users/Ahmed/Downloads/wetransfer_s7j1contract2b_interpbad_notch
 repertoire_2 = '/Users/Ahmed/Downloads/wetransfer_s7j1contract2b_interpbad_notch_band_2022-07-21_1633/post/'; % Répertoire où se trouvent les .mat Post-vibration
 EMG_chanel = 6; % Quel canal EMG utiliser : mettre 6 pour FCR, 5 pour ECR 
 Freq_space = [1:0.5:50]; % Espace de fréquences à étudier (1 à 50Hz tous les 0.5Hz). Attention au temps de calcul ! 
-Utiliser_laplacien = 0; %0 = pas de laplacien ; 1 = laplacien // je conseille de ne pas le mettre mais à toi de voire
+Utiliser_laplacien = 1; %0 = pas de laplacien ; 1 = laplacien // je conseille de ne pas le mettre mais à toi de voire
 condition{1} = 'pre-vibration' % nom condition_1
 condition{2} = 'post-vibration'% nom condition_2
 n_sujet = 2; % nombre de sujets dans le protocole
@@ -33,10 +33,8 @@ Hanning_window = 1000; % La cohérence par FFT demande une fenêtre d'ordre du f
 % essaie egalement de voire ce que ca donne avec et sans filtre laplacien
 % et essaie ensuite de changer le hanning_window ;) 
 
-%%
-sim = 1; %%%%%% !!!! bien mettre à 0 si tu traites les vrais signaux 
+sim = 1;
 power_sim = 0.0001;
-%%
 
 %% Paramètres d'affichage des résultats 
 
@@ -69,19 +67,19 @@ Name_file{n_sujet,2} = dir(fullfile(repertoire_2s, 'data*'))
 
 % for file = 1:2 % met ça quand tu es sur de la simulation si tu ne veux pas qu'il calcule pour les 30 sujets) :) 
 % à la place de : 
-% for file = 1:length(Name_file{pre_post})  (ligne 73)
+% for file = 1:length(Name_file{n_sujet,pre_post})   (ligne 73)
 
-for file = 1:length(Name_file{pre_post}) 
+for file = 1:length(Name_file{n_sujet,pre_post}) 
 
-disp(strcat({'Il reste : ' num2str(file),' / ', num2str(length(Name_file{n_sujet,pre_post})) 'dans le groupe' num2str(pre_post) 'sujet'}))
+disp(strcat({'Il reste : ' num2str(file),' fichier / ', num2str(length(Name_file{n_sujet,pre_post})) 'sujet'  num2str(pre_post)}))
 
 if pre_post == 1
-file_to_load = strcat(repertoire_1s,Name_file{n_sujet,pre_post}(file).name);
+file_to_load = strcat(repertoire_1s,Name_file{n_sujet,1}(file).name);
 load(file_to_load);
 end
 
 if pre_post == 2
-file_to_load = strcat(repertoire_2s,Name_file{n_sujet,pre_post}(file).name);
+file_to_load = strcat(repertoire_2s,Name_file{n_sujet,2}(file).name);
 load(file_to_load);
 end
 
